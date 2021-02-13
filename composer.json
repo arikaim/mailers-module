@@ -1,0 +1,20 @@
+{
+    "name": "arikaim/mailers-module",
+    "description": "Arikam CMS mailer drivers.",
+    "keywords": ["Module","Arikaim CMS mailer drivers module"],
+    "type": "arikaim-module",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {
+        "php": ">=7.1",
+        "arikaim/installer": "*",
+        "arikaim/mail": "*"
+    },
+    "extra": {
+        "path": "mailers"
+    }
+}

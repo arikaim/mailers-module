@@ -1,0 +1,30 @@
+<?php
+/**
+ * Arikaim
+ *
+ * @link        http://www.arikaim.com
+ * @copyright   Copyright (c)  Konstantin Atanasov <info@arikaim.com>
+ * @license     http://www.arikaim.com/license
+ * 
+*/
+namespace Arikaim\Modules\Mailers;
+
+use Arikaim\Core\Extension\Module;
+
+/**
+ * Mailers module class
+ */
+class Mailers extends Module
+{  
+    /**
+     * Install module
+     *
+     * @return boolean
+     */
+    public function install()
+    {
+        $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\SmtpMailerDriver');
+     
+        return true;
+    }
+}
