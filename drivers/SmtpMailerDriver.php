@@ -102,7 +102,9 @@ class SmtpMailerDriver implements DriverInterface, MailerDriverInterface
         // ssl
         $properties->property('ssl',function($property) {
             $property
-                ->title('Ssl')
+                ->title('SSL')
+                ->id('ssl')
+                ->description('Use ssl encryption')
                 ->group('host_group')
                 ->type('boolean')              
                 ->default(false);
