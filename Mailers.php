@@ -19,12 +19,10 @@ class Mailers extends Module
     /**
      * Install module
      *
-     * @return boolean
+     * @return void
      */
     public function install()
     {
         $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\SmtpMailerDriver');
-     
-        return true;
     }
 }
