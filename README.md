@@ -7,6 +7,7 @@ Mailer drivers for Arikaim CMS
 
 
 #### Drivers
+ * Sendmail
  * Smtp
 
 
