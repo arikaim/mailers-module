@@ -16,9 +16,9 @@ use Arikaim\Core\Interfaces\Driver\DriverInterface;
 use Arikaim\Core\Mail\Interfaces\MailerDriverInterface;
 
 /**
- * Sendmail class
+ * Gmail mailer driver class
  */
-class SendmailDriver implements DriverInterface, MailerDriverInterface
+class GmailMailerDriver implements DriverInterface, MailerDriverInterface
 {   
     use Driver;
    
@@ -34,7 +34,7 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      */
     public function __construct()
     {
-        $this->setDriverParams('sendmail','mailers','Sendmail mailer','Sendmail mailer driver');        
+        $this->setDriverParams('gmail-mailer','mailers','Gmail mailer','Gmail mailer driver');        
     }
 
     /**
@@ -55,8 +55,10 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      */
     public function initDriver($properties)
     {     
-        $config = $properties->getValues(); 
-        $this->transport = Transport::fromDsn('sendmail://default'); 
+        $config = $properties->getValues();       
+        $dns = 'gmail+smtp://' . $config['username'] . ':' . $config['password'] . '@default';
+
+        $this->transport = Transport::fromDsn($dns);          
     }
 
     /**
@@ -66,14 +68,22 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      * @return array
      */
     public function createDriverConfig($properties)
-    {            
-        $properties->property('dns',function($property) {
+    {                        
+        // username
+        $properties->property('username',function($property) {
             $property
-                ->title('Email transport Dns')
-                ->type('text')
-                ->default('sendmail://default')             
-                ->readonly(true)              
-                ->value('sendmail://default');           
+                ->title('Username')
+                ->type('text')             
+                ->required(true)    
+                ->default('');
+        });
+        // password
+        $properties->property('password',function($property) {
+            $property
+                ->title('Password')
+                ->type('password')               
+                ->required(true)    
+                ->default('');
         });
     }
 }

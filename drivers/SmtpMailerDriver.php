@@ -9,6 +9,8 @@
 */
 namespace Arikaim\Modules\Mailers\Drivers;
 
+use Symfony\Component\Mailer\Transport;
+
 use Arikaim\Core\Driver\Traits\Driver;
 use Arikaim\Core\Interfaces\Driver\DriverInterface;
 use Arikaim\Core\Mail\Interfaces\MailerDriverInterface;
@@ -55,13 +57,10 @@ class SmtpMailerDriver implements DriverInterface, MailerDriverInterface
     {     
         $config = $properties->getValues(); 
            
-        $this->transport = new \Swift_SmtpTransport($config['host'],$config['port']);
-        $this->transport->setUsername($config['username']);
-        $this->transport->setPassword($config['password']);   
-        
-        if ($config['ssl']== true) {
-            $this->transport->setEncryption('ssl');    
-        }        
+        $port = $config['port'] ?? 25;
+        $dns = 'smtp://' . $config['username'] . ':' . $config['password'] . '@' . $config['host'] . ':' . $port;
+
+        $this->transport = Transport::fromDsn($dns);          
     }
 
     /**
