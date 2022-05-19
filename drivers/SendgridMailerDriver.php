@@ -56,8 +56,6 @@ class SendgridMailerDriver implements DriverInterface, MailerDriverInterface
     public function initDriver($properties)
     {     
         $config = $properties->getValues(); 
-           
-        $port = $config['port'] ?? 25;
         $dns = 'sendgrid://' . $config['api_key'] . '@default';
 
         $this->transport = Transport::fromDsn($dns);          

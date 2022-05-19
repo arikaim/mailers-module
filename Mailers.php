@@ -25,6 +25,7 @@ class Mailers extends Module
     {
         $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\SendmailDriver');
         $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\SmtpMailerDriver'); 
-        $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\GmailMailerDriver');       
+        $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\GmailMailerDriver');      
+        $this->installDriver('Arikaim\\Modules\\Mailers\\Drivers\\SendgridMailerDriver');        
     }
 }
