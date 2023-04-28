@@ -10,7 +10,8 @@ Mailer drivers for Arikaim CMS
  * Sendmail
  * Smtp
  * Gmail
-
+ * Mailgun
+ * Sendgrid
 
 #### Requirements 
   * [Arikaim CMS](https://github.com/arikaim/arikaim) 
