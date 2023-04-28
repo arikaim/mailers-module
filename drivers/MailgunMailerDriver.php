@@ -16,9 +16,9 @@ use Arikaim\Core\Interfaces\Driver\DriverInterface;
 use Arikaim\Core\Mail\Interfaces\MailerDriverInterface;
 
 /**
- * Sendmail class
+ * Mailgun  Mailer Driver class
  */
-class SendmailDriver implements DriverInterface, MailerDriverInterface
+class MailgunMailerDriver implements DriverInterface, MailerDriverInterface
 {   
     use Driver;
    
@@ -34,7 +34,7 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      */
     public function __construct()
     {
-        $this->setDriverParams('sendmail','mailers','Sendmail mailer','Sendmail mailer driver');        
+        $this->setDriverParams('mailgun-mailer','mailers','Mailgun mailer','Mailgun mailer driver');        
     }
 
     /**
@@ -56,7 +56,9 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
     public function initDriver($properties)
     {     
         $config = $properties->getValues(); 
-        $this->transport = Transport::fromDsn('sendmail://default'); 
+        $dns = 'mailgun+https://' . $config['api_key'] . ':' . $config['domain'] . '@default';
+
+        $this->transport = Transport::fromDsn($dns);          
     }
 
     /**
@@ -67,13 +69,22 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      */
     public function createDriverConfig($properties)
     {            
-        $properties->property('dns',function($property) {
+        // api key
+        $properties->property('api_key',function($property) {
             $property
-                ->title('Email transport Dns')
-                ->type('text')
-                ->default('sendmail://default')             
-                ->readonly(true)              
-                ->value('sendmail://default');           
+                ->title('Api Key')
+                ->type('text')               
+                ->required(false)    
+                ->default('');           
+        });
+        
+        // Domain
+        $properties->property('domain',function($property) {
+            $property
+                ->title('Domain')
+                ->type('text')               
+                ->required(false)    
+                ->default('');           
         });
     }
 }
