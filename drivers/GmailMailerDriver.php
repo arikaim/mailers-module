@@ -56,7 +56,7 @@ class GmailMailerDriver implements DriverInterface, MailerDriverInterface
     public function initDriver($properties)
     {     
         $config = $properties->getValues();       
-        $dns = 'gmail+smtp://' . $config['username'] . ':' . $config['password'] . '@default';
+        $dns = 'gmail+smtp://' . $config['username'] . ':' . $config['password'] . '@default?verify_peer=0';
 
         $this->transport = Transport::fromDsn($dns);          
     }
