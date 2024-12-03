@@ -55,7 +55,6 @@ class SendmailDriver implements DriverInterface, MailerDriverInterface
      */
     public function initDriver($properties)
     {     
-        $config = $properties->getValues(); 
         $this->transport = Transport::fromDsn('sendmail://default'); 
     }
 

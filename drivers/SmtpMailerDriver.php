@@ -58,7 +58,10 @@ class SmtpMailerDriver implements DriverInterface, MailerDriverInterface
         $config = $properties->getValues(); 
            
         $port = $config['port'] ?? 25;
-        $dns = 'smtp://' . $config['username'] . ':' . $config['password'] . '@' . $config['host'] . ':' . $port;
+        $password = \urlencode($config['password']);
+        $username = \urlencode($config['username']);
+
+        $dns = 'smtp://' . $username . ':' . $password . '@' . $config['host'] . ':' . $port;
 
         $this->transport = Transport::fromDsn($dns);          
     }
